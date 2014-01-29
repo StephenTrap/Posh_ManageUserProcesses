@@ -4,11 +4,11 @@
 .DESCRIPTION
    When using RDS (terminal services) this cmdlet will allow an admin to remotely terminate a process on a specific user's session.
 .EXAMPLE
-   Kill-ProcessPerUser -ComputerName batcomputer -process notepad.exe -user batman
+   Stop-ProcessPerUser -ComputerName batcomputer -process notepad.exe -user batman
 
    Here we are terminating 'notepad.exe' for 'batman' on his server 'batcomputer'
 #>
-function Kill-ProcessPerUser
+function Stop-ProcessPerUser
 {
     [CmdletBinding()]
     Param
@@ -41,7 +41,7 @@ function Kill-ProcessPerUser
             Where-Object { $_.GetOwner().User -eq $User } | 
             Foreach-Object { $_.Terminate() } | select ProcessName
 
-            Write-Host "$Process has been terminated for $User on $ComputerName." -ForegroundColor Cyan
+            Write-Host "$Process has been terminated for $User on $ComputerName. Great job!" -ForegroundColor Cyan
         }
         else{
             Write-Host "'$Process' is not running for $User on $ComputerName. Double-check your parameters." -ForegroundColor Red
