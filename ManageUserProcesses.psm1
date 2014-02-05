@@ -83,11 +83,14 @@ function Get-ProcessPerUser
 
     Begin
     { 
-        $PName = (Get-WmiObject -Class Win32_Process -ComputerName $ComputerName | 
-        Where-Object { $_.GetOwner().User -eq $User } | select ProcessName)
+        Write-Host "The script is executing ..."
+
+        
     }
     Process
     {     
+        $PName = (Get-WmiObject -Class Win32_Process -ComputerName $ComputerName | 
+        Where-Object { $_.GetOwner().User -eq $User } | select ProcessName)
 
         if($PName){
             Write-Host "These are the Processes running on $ComputerName for $User" -ForegroundColor Cyan
