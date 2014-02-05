@@ -28,12 +28,13 @@ function Stop-ProcessPerUser
 
     Begin
     {
-        $PName = (Get-WmiObject -Class Win32_Process -Filter "Name= '$Process'" -ComputerName $ComputerName | 
-        Where-Object { $_.GetOwner().User -eq $User })
+        Write-Host "The script is executing ..."
+        
     }
     Process
     {
-
+        $PName = (Get-WmiObject -Class Win32_Process -Filter "Name= '$Process'" -ComputerName $ComputerName | 
+        Where-Object { $_.GetOwner().User -eq $User })
 
         if($PName){
 
